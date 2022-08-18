@@ -7,8 +7,7 @@ module.exports = {
     mode: 'development',
     entry: {
         main: './index.pug',
-        card: './pages/card.pug',
-        color: './pages/color.pug'
+
 
     },
     output: {
@@ -23,12 +22,12 @@ module.exports = {
             },
 
             {
-                test: /\.(png|jpg|svg|gif)$/,
+                test: /\.(png|jpg|svg|gif|jfif)$/,
                 type: 'asset/resource'
             },
             {
-                test: /\.(ttf|woff|woff2|eot)$/,
-                type: 'asset/resource'
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
             },
 
             {
@@ -43,7 +42,17 @@ module.exports = {
                     pretty: 'true',
                 }// Pug loader
             },
-        ] ///Установил css и scss закончил на установке pug-plagin
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            },
+        ]
 
 
     },
@@ -51,5 +60,5 @@ module.exports = {
         new CleanWebpackPlugin(),
         new PugPlugin(),
 
-    ]
+        ]
 };
